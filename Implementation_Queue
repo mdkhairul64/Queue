@@ -1,0 +1,126 @@
+///here i use rare and front 
+
+
+//rare is for the inserting the value 
+
+/// front is for the top element
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Queue{
+   int *arr;
+   int front;
+
+   int rear;
+   int size;
+
+public:
+    Queue(int n)
+    {
+        size = n;
+        arr = new int[size];
+        front = 0;
+        rear = 0;
+    }
+
+    bool isEmpty()
+    {
+        if(front == rear)
+        {
+           return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    void enqueue_push(int data)
+    {
+        if(rear == size)
+        {
+            cout<<"queue is empty"<<endl;
+        }
+        else{
+            arr[rear] = data;
+            rear++;
+        }
+    }
+
+    void  dequeue_pop()
+    {
+        if(rear == front)
+        {
+            rear = 0;
+            front = 0;
+            return ;
+        }
+        else{
+            //int ans=arr[front];
+           // arr[front]=-1;
+            front++;
+            return ;
+            
+            // return ans;
+        }
+    }
+
+    int font_value()
+    {
+        if(front == rear)
+        {
+            return -1;
+        }
+        else{
+            return arr[front];
+        }
+    }
+
+    
+};
+
+void reverse(Queue &q,int n)
+{
+    if(n==0)
+    {
+        return;
+    }
+    int fr=q.font_value();
+    q.dequeue_pop();
+    
+    reverse(q,n-1);
+
+    q.enqueue_push(fr);
+    
+}
+
+int main()
+{
+    int n;
+    cin>>n;
+    Queue que(n);
+
+    for(int i = 1 ;i <=n ; i++)
+    {
+        int x;
+        cin>>x;
+
+        que.enqueue_push(x);
+    }
+   
+
+     int original=n;
+     reverse(que,n);
+
+   
+   
+
+    while(original!=0)
+    {
+        cout<<que.font_value()<<" ";
+        que.dequeue_pop();
+        original--;
+    }
+
+
+}
